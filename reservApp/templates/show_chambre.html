@@ -1,0 +1,17 @@
+
+
+{% block content %}
+{% load static %}
+<div>
+    <div class="imageschambre">
+        <h4>{{ chambre.nom }}</h4>
+         <a href="chambreC2.html"><img src="{% static 'chambre2.jpg' %}" alt="chambre"></a> 
+        <p>{{ chambre.taille }}</p>
+        <p>{{ chambre.description }}</p>
+    </div>
+    <a href="{% url 'create_reservation' chambre_id=chambre.id %}">
+        <button>Réserver</button>
+    </a>
+    
+</div>
+{% endblock %}

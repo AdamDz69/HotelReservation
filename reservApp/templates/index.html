@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+   #imagePrincipale {
+            text-align: center;
+            margin-top: 50px;
+            background: url("{% static 'image-principale.JPG' %}}") no-repeat fixed center;
+            /* Propriétés supplémentaires pour le fond */
+            background-size: cover; /* Redimensionner l'image pour couvrir tout le conteneur */
+            height: 300px; /* Hauteur de la section */
+            color: white; /* Couleur du texte sur l'image */
+            padding: 50px; /* Espacement intérieur */
+        }
+        /* Style pour les titres */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Style pour le bloc de présentation */
+        #presentation {
+            margin-top: 30px;
+        }
+
+        /* Style pour le texte d'introduction */
+        #textIntro {
+            margin-bottom: 20px;
+        }
+
+        /* Style pour les prestations */
+        #prestations {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .imagesPrestations {
+            text-align: center;
+        }
+
+        .imagesPrestations img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+  
+</style>
+    <div id="imagePrincipale">
+        <h1>Palace de Médoc</h1>
+        <div id="premierTrait"></div>
+        <h3>Palace 5 étoiles</h3>
+    </div>
+
+    <section id="presentation">
+        <div id="textIntro">
+            <h2>Un lieu unique, pour un séjour unique</h2>
+            <p>Bienvenue au Palace de Médoc, un palace 5 étoiles. Vous découvrirez chez nous les spécialités gastronomiques
+                du sud ouest de la France. Avec plusieurs activités enrichissantes et plaisantes.</p>
+            <p>Venez vivre un séjour de rêve dans notre hôtel ! Situé proche de l'océan Atlantique, profitez de magnifiques
+                paysages naturels de la région. Un séjour charmant et agréable, pendant lequel vous aurez l'occasion de
+                découvrir également de merveilleux sites tels que les châteaux du Médoc, l'estuaire de la Gironde ou encore
+                les beaux paysages du vignoble Bordelais.</p>
+            <p>Bon séjour !</p>
+        </div>
+        <div id="prestations">
+            <div class="imagesPrestations">
+                <h4>Nous trouver</h4>
+                <a href="ggmap.html"><img src="{% static 'carte.JPG' %}" alt="carte"></a>
+            </div>
+            <div class="imagesPrestations">
+                <h4>Côté chambres</h4>
+                <a href="chambres.html"><img src="{% static 'chambre1.JPG' %}" alt="chambre"></a>
+            </div>
+            <div class="imagesPrestations">
+                <h4>Côté cuisine</h4>
+                <a href="menu.html"><img src="{% static 'repas.JPG' %}" alt="repas"></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tourisme">
+        <h5>Et tant à découvrir...</h5>
+        <ul>
+            <li id="ocean">
+                <p>L'océan Atlantique</p>
+                <img src="{% static 'ocean.jpg' %}" alt="ocean">
+            </li>
+            <li id="chateau">
+                <p>Les châteaux du Médoc</p>
+                <img src="{% static 'chateau.JPG' %}" alt="ocean">
+            </li>
+            <li id="phare">
+                <p>L'estuaire de la Gironde</p>
+                <img src="{% static 'phare.JPG' %}" alt="ocean">
+            </li>
+            <li id="vignoble">
+                <p>Le vignoble Bordelais</p>
+                <img src="{% static 'vignes.jpg' %}" alt="ocean">
+        </ul>
+    </section>
+{% endblock %}

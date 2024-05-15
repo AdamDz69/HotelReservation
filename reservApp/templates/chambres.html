@@ -1,0 +1,13 @@
+
+
+{% block content %}
+{% load static %}
+    {% for chambre in chambres %}
+        <div class="imageschambre">
+            <h4>{{ chambre.nom }}</h4>
+             <a href="{% url 'show_chambre' chambre.id %}"><img src="{% static 'chambre2.jpg' %}" alt="chambre"></a>
+            <p>{{ chambre.taille }}</p>
+            <p>{{ chambre.description }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

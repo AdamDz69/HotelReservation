@@ -1,0 +1,46 @@
+[
+    {
+        "model": "reservApp.chambre",
+        "pk": 1,
+        "fields": {
+            "nom": "Chambre classique 2 personnes",
+            "taille": "20 à 25m²",
+            "description": "Chambre pour 2 personnes, lit 2 places",
+            "prix": "80.00",
+            "image": "chambre1"
+        }
+    },
+    {
+        "model": "reservApp.chambre",
+        "pk": 2,
+        "fields": {
+            "nom": "Chambre prestige 2 personnes",
+            "taille": "25 à 30m²",
+            "description": "Chambre pour 2 personnes, confort supplémentaire, lit 2 places",
+            "prix": "110.00",
+            "image": "chambre2"
+        }
+    },
+    {
+        "model": "reservApp.chambre",
+        "pk": 3,
+        "fields": {
+            "nom": "Chambre classique 4 personnes",
+            "taille": "25 à 30m²",
+            "description": "Chambre pour 4 personnes, lit 2 places + 2 lits simples",
+            "prix": "125.00",
+            "image": "chambre1"
+        }
+    },
+    {
+        "model": "reservApp.chambre",
+        "pk": 4,
+        "fields": {
+            "nom": "Chambre prestige 4 personnes",
+            "taille": "30 à 35m²",
+            "description": "Chambre pour 4 personnes, confort supplémentaire, lit 2 places + 2 lits simples",
+            "prix": "150.00",
+            "image": "chambre2"
+        }
+    }
+]
