@@ -1,17 +1,61 @@
-
-
-{% block content %}
-{% load static %}
-<div>
-    <div class="imageschambre">
-        <h4>{{ chambre.nom }}</h4>
-         <a href="chambreC2.html"><img src="{% static 'chambre2.jpg' %}" alt="chambre"></a> 
-        <p>{{ chambre.taille }}</p>
-        <p>{{ chambre.description }}</p>
-    </div>
-    <a href="{% url 'create_reservation' chambre_id=chambre.id %}">
-        <button>Réserver</button>
+{% extends "base.html" %} {% block content %} {% load static %}
+<div class="chambre-container">
+  <div class="imageschambre">
+    <h4>{{ chambre.nom }}</h4>
+    <a href="{% url 'show_chambre' chambre.id %}">
+      <img src="{% static 'chambre2.jpg' %}" alt="chambre" />
     </a>
-    
+    <p>{{ chambre.taille }}</p>
+    <p>{{ chambre.description }}</p>
+  </div>
+  <a href="{% url 'create_reservation' chambre_id=chambre.id %}">
+    <button>Réserver</button>
+  </a>
 </div>
+<style>
+  .chambre-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh; /* Assurez-vous que le conteneur prend au moins 80% de la hauteur de la fenêtre */
+    text-align: center;
+    padding: 20px;
+  }
+
+  .imageschambre {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .imageschambre img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .imageschambre h4,
+  .imageschambre p {
+    margin: 10px 0;
+  }
+
+  .imageschambre a {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  button {
+    font-size: 1.5em;
+    background-color: #fffae1;
+  }
+  button:hover {
+    background-color: #e55039;
+    color: #fffae1;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+</style>
 {% endblock %}

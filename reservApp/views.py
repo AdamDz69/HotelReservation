@@ -5,8 +5,12 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.shortcuts import render, redirect
-from .forms import ReservationForm
+from .forms import ReservationForm 
+from .forms import SignUpForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
+@login_required
 def index(request):
     # Récupérer toutes les chambres depuis la base de données
     chambres = Chambre.objects.all()
@@ -14,17 +18,19 @@ def index(request):
     # Passer les chambres au template pour l'affichage
     return render(request, 'index.html', {'chambres': chambres})
 
-
+@login_required
 def chambres(request):
     chambres = Chambre.objects.all()
     return render(request, 'chambres.html', {'chambres': chambres})
 
+@login_required
 def show_chambre(request, chambre_id):
     chambre = Chambre.objects.get(id = chambre_id)
     return render(request, 'show_chambre.html', {'chambre' : chambre})
 
 from django.db.models import Q
- 
+
+@login_required
 def create_reservation(request, chambre_id):
     chambre = Chambre.objects.get(pk=chambre_id)  # Récupérer la chambre correspondant à l'ID
     context = {'chambre': chambre}
@@ -55,20 +61,48 @@ def create_reservation(request, chambre_id):
                 name=name,
                 start=start,
                 end=end,
-                chambre=chambre  # Associer la réservation à la chambre correspondante
+                chambre=chambre , # Associer la réservation à la chambre correspondante
+                author=request.user,  # Associer la réservation à l'utilisateur connecté
             )
-            return redirect('index')  # Redirigez vers une vue de confirmation
+            return redirect('confirm_reservation', chambre_id=nouvelle_reservation.chambre.id)  # Redirigez vers une vue de confirmation
     else:
         form = ReservationForm()
     
     return render(request, 'create_reservation.html', {'form': form})
 
+@login_required
 def add_reservation(request):
     title = request.GET.get("title")
     start = request.GET.get("start")
     end = request.GET.get("end")
-    reservation = Reservation(name=title, start=start, end=end)
+    reservation = Reservation(name=title, start=start, end=end, author=request.user)
     reservation.save()
     data = {}
  
     return JsonResponse(data)
+
+@login_required
+def confirm_reservation(request, chambre_id):
+    chambre = Chambre.objects.get(pk=chambre_id)
+    reservation = Reservation.objects.filter(chambre=chambre).last()
+    return render(request, 'confirm_reservation.html', {'reservation': reservation})
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # Charger le profil utilisateur créé automatiquement
+            user.email = form.cleaned_data.get('email')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('index')  # Rediriger vers la page d'accueil après l'inscription
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+

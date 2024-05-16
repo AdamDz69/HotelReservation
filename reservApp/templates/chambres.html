@@ -1,13 +1,47 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<div class="chambres-container">
+  {% for chambre in chambres %}
+  <div class="imageschambre">
+    <h4>{{ chambre.nom }}</h4>
+    <a href="{% url 'show_chambre' chambre.id %}"
+      ><img src="{% static 'chambre2.jpg' %}" alt="chambre"
+    /></a>
+    <p>{{ chambre.taille }}</p>
+    <p>{{ chambre.description }}</p>
+  </div>
+  {% endfor %}
+</div>
 
+<style>
+  .chambres-container {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne suivante */
+    justify-content: center; /* Centre les chambres horizontalement */
+    gap: 20px; /* Espace entre les chambres */
+    padding: 20px;
+    margin-top: 60px;
+  }
 
-{% block content %}
-{% load static %}
-    {% for chambre in chambres %}
-        <div class="imageschambre">
-            <h4>{{ chambre.nom }}</h4>
-             <a href="{% url 'show_chambre' chambre.id %}"><img src="{% static 'chambre2.jpg' %}" alt="chambre"></a>
-            <p>{{ chambre.taille }}</p>
-            <p>{{ chambre.description }}</p>
-        </div>
-    {% endfor %}
+  .imageschambre {
+    flex: 1 1 calc(33.333% - 40px); /* Largeur de chaque chambre avec espace entre eux */
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .imageschambre img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .imageschambre h4,
+  .imageschambre p {
+    margin: 10px 0;
+  }
+</style>
 {% endblock %}

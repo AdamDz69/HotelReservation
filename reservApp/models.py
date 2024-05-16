@@ -17,6 +17,7 @@ class Reservation(models.Model):
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True) 
     chambre = models.ForeignKey(Chambre, on_delete=models.CASCADE, related_name='reservations', null=True, blank=True)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         db_table = "reservations"

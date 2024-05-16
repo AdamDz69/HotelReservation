@@ -1,5 +1,7 @@
 from django import forms
 from .models import Reservation
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
  
 class ReservationForm(forms.ModelForm):
     start_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control datepicker'}))
@@ -10,3 +12,11 @@ class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
         fields = ['name', 'start_date', 'start_time', 'end_date', 'end_time']
+
+
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
