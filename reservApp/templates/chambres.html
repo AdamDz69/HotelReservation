@@ -3,9 +3,14 @@
   {% for chambre in chambres %}
   <div class="imageschambre">
     <h4>{{ chambre.nom }}</h4>
-    <a href="{% url 'show_chambre' chambre.id %}"
-      ><img src="{% static 'chambre2.jpg' %}" alt="chambre"
-    /></a>
+    <a href="{% url 'show_chambre' chambre.id %}">
+      <!-- Utiliser l'image associée à chaque chambre -->
+      {% if chambre.image %}
+      <img src="{{ chambre.image.url }}" alt="{{ chambre.nom }}" />
+      {% else %}
+      <img src="{% static 'chambre2.jpg' %}" alt="Image par défaut" />
+      {% endif %}
+    </a>
     <p>{{ chambre.taille }}</p>
     <p>{{ chambre.description }}</p>
   </div>
@@ -15,15 +20,19 @@
 <style>
   .chambres-container {
     display: flex;
-    flex-wrap: wrap; /* Permet de passer à la ligne suivante */
-    justify-content: center; /* Centre les chambres horizontalement */
-    gap: 20px; /* Espace entre les chambres */
+    flex-wrap: wrap;
+    /* Permet de passer à la ligne suivante */
+    justify-content: center;
+    /* Centre les chambres horizontalement */
+    gap: 20px;
+    /* Espace entre les chambres */
     padding: 20px;
     margin-top: 60px;
   }
 
   .imageschambre {
-    flex: 1 1 calc(33.333% - 40px); /* Largeur de chaque chambre avec espace entre eux */
+    flex: 1 1 calc(33.333% - 40px);
+    /* Largeur de chaque chambre avec espace entre eux */
     box-sizing: border-box;
     margin: 10px;
     padding: 20px;
